@@ -1,18 +1,12 @@
 import * as express from 'express';
-import  { Request, Response } from 'express';
-import DB from '../database'
-
+import { connection } from '../database'
+import taskRoutes     from '../api/tasks/routes'
 const app = express();
 const { PORT } = process.env;
 
-DB.connectLocal()
-    .then(()=>{
-      app.get('/', (req: Request, res: Response) => {
-        res.send({
-                   message: 'hello world',
-                 });
-      });
-      
+
+connection().then(()=>{
+      taskRoutes(app);
       app.listen(PORT, () => {
         console.log('server started at http://localhost:'+PORT || 3000);
       });
