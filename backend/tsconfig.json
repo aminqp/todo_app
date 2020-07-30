@@ -20,13 +20,6 @@
     "declaration": true,
     "sourceMap": true,
     "incremental": true,
-    "paths": {
-      "@apis": ["src/api"],
-      "@constants": ["src/constants"],
-      "@db": ["src/database"],
-      "@interfaces": ["src/interfaces"],
-      "@routes": ["src/routes"]
-    },
     "downlevelIteration": true
   },
   "include": [
