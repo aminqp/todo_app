@@ -12,10 +12,12 @@ const taskSchema =
                         },
                         status: {
                           type: String,
-                          enum: Object.values(TaskStatus)
+                          enum: Object.values(TaskStatus),
+                          default: TaskStatus.TODO
                         },
                         order: {
                           type: String,
+                          default: 100
                         },
       
                       } , { timestamps : true } );

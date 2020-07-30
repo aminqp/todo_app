@@ -1,48 +1,117 @@
-import { TaskInterface }      from '../../interfaces'
-import { Document }             from "mongoose";
+import { TaskInterface } from '../../interfaces';
+import { Types }         from 'mongoose';
+import TasksModel        from './task.schema';
 
-import TasksModel from './task.schema';
-
+/* TODO-qp::
+ *   1) make it abstract
+ * */
 class TasksService
 {
-   constructor(
-       private _model = TasksModel
-   ) {}
-   
-   async findAll(filter = {}): Promise<TaskInterface[]> {
-      return this._model.find(filter).exec();
-   }
-   
-   async findOne(filter = {}): Promise<TaskInterface|null> {
-      return this._model.findOne(filter).exec();
-   }
-   
-   async findById(id: string): Promise<TaskInterface|null> {
-      return this._model.findById(id).exec();
-   }
-   
-   async create(item: TaskInterface): Promise<TaskInterface> {
-      return this._model.create(item);
-   }
-   
-   async update(id: string, item: TaskInterface): Promise<TaskInterface> {
-      return this._model
-          // @ts-ignore
-          .updateOne(Types.ObjectId(id), item, { new: true })
+  constructor(
+      private _model = TasksModel
+  )
+  {}
+  
+  async findAll( filter = {} ) : Promise<TaskInterface[]>
+  {
+    try
+    {
+      return this._model.find( filter ).exec();
+    }
+    catch ( e )
+    {
+      return [];
+    }
+  }
+  
+  async findOne( filter = {} ) : Promise<TaskInterface | null>
+  {
+    try
+    {
+      return this._model.findOne( filter ).exec();
+      
+    }
+    catch ( e )
+    {
+      return null;
+    }
+  }
+  
+  async findById( id : string ) : Promise<TaskInterface | null>
+  {
+    try
+    {
+      return this._model.findById( id ).exec();
+    }
+    catch ( e )
+    {
+      return null;
+    }
+  }
+  
+  async create( item : TaskInterface ) : Promise<boolean>
+  {
+    try
+    {
+      const newTask = await this._model.create( item );
+      return !!newTask._id;
+    }
+    catch ( e )
+    {
+      return false;
+    }
+  }
+  
+  async update( id : string , item : TaskInterface ) : Promise<boolean>
+  {
+    try
+    {
+      const updated = await this._model
+          .updateOne( {
+                        _id : Types.ObjectId( id )
+                      } , item , { new : false } )
           .exec();
-   }
-   
-   async deleteById(id: string): Promise<TaskInterface> {
-      // @ts-ignore
-      return this._model.deleteOne(Types.ObjectId(id)).exec();
-   }
-   
-   async delete(filter = {}): Promise<any> {
-      return this._model.deleteMany(filter).exec();
-   }
-   
+      
+      return !!updated.nModified;
+      
+    }
+    catch ( e )
+    {
+      return false;
+    }
+  }
+  
+  async deleteById( id : string ) : Promise<boolean>
+  {
+    
+    try
+    {
+      const deleted = await this._model
+          .deleteOne( {
+                        _id : Types.ObjectId( id )
+                      } ).exec();
+      return !!deleted.deletedCount;
+    }
+    catch ( e )
+    {
+      return false;
+    }
+  }
+  
+  async delete( filter = {} ) : Promise<boolean>
+  {
+    try
+    {
+      const deleted = await this._model.deleteMany( filter ).exec();
+      return !!deleted.deletedCount;
+    }
+    catch ( e )
+    {
+      return false;
+    }
+  }
+  
 }
 
-
-export default TasksService
+export default TasksService;
 
