@@ -1,5 +1,9 @@
 import { TaskStatus } from '../../constants'
-import { TasksModel }     from '../../interfaces'
+import { TasksModelInterface }     from '../../interfaces'
+// @ts-ignore
+import * as mongoosePaginate     from 'mongoose-paginate-v2'
+// import { mongoosePagination } from "ts-mongoose-pagination";
+
 import { model , Schema } from 'mongoose';
 
 const taskSchema =
@@ -22,6 +26,8 @@ const taskSchema =
       
                       } , { timestamps : true } );
 
-const Tasks = model<TasksModel>('Tasks', taskSchema);
+taskSchema.plugin(mongoosePaginate);
+
+const Tasks = model<TasksModelInterface>('Tasks', taskSchema);
 
 export default Tasks

@@ -1,4 +1,4 @@
-import mongoose = require('mongoose');
+import {Document, Types} from  'mongoose';
 import { TaskStatus } from '../constants'
 
 export interface TaskInterface
@@ -8,4 +8,4 @@ export interface TaskInterface
   status?: TaskStatus;
   order?: number;
 }
-export interface TasksModel extends mongoose.Document, TaskInterface { }
+export interface TasksModelInterface extends Document, TaskInterface { }
