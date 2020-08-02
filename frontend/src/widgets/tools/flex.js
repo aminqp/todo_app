@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { flexStyle } from '#styles';
+import { flexStyle } from '../../styles';
 
 const Flex = ({
   children, className, onClick, title, ...styles
@@ -77,7 +77,6 @@ const Flex = ({
   );
 };
 
-
 Flex.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.string,
@@ -99,6 +98,5 @@ Flex.defaultProps = {
   onClick: () => null,
   title: null
 };
-
 
 export default Flex;

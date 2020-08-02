@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-
 const useFetch = (fetch) => {
   const [load, setLoad] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -39,6 +38,5 @@ const useFetch = (fetch) => {
     response
   });
 };
-
 
 export default useFetch;
