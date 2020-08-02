@@ -8,7 +8,6 @@ export const initialState = {
   restUrl: `${process.env.REACT_APP_HTTP_BASE_URL}/${process.env.REACT_APP_HTTP_API_VERSION}`
 };
 
-
 export const appReducers = (state = initialState, payload) => {
   switch (payload.type) {
     case APP_DIRECTION:

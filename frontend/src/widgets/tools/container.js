@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-
 const style = makeStyles((theme) => ({
   container: theme.app.container
 }),

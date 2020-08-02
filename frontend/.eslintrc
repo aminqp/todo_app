@@ -130,12 +130,12 @@
             "alias": {
                 "map": [
                     [
-                        "#repository",
-                        "./src/repository"
+                        "#apis",
+                        "./src/apis"
                     ],
                     [
                         "#styles",
-                        "./src/styles/jss"
+                        "./src/styles"
                     ],
                     [
                         "#widgets",

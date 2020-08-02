@@ -4,10 +4,11 @@ import React from 'react';
 import { FormattedMessage, IntlProvider } from 'react-intl';
 import { Provider as StoreProvider } from 'react-redux';
 
+import { configureStore } from '#store';
+import { appTheme } from '#styles';
+import { Flex } from '#widgets';
+
 import locales from './locale';
-import { configureStore } from './store';
-import { appTheme } from './styles';
-import { Flex } from './widgets';
 
 const { store } = configureStore();
 

@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { Http } from "../widgets"
+import { Http } from "#widgets"
 
 /**
  * This is auto generated file from postman collection
