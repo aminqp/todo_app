@@ -5,8 +5,8 @@
 /* eslint-disable */
 
 
-import * as TasksRepository from './tasks';
+import * as TasksCollection from './tasks';
 
 export {
-        TasksRepository,
+        TasksCollection,
 };

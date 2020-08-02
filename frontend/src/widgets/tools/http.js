@@ -1,6 +1,5 @@
 import * as axios from 'axios';
 
-
 class HttpClass {
    headers = {
      'Accept-Language': 'en',
@@ -25,21 +24,12 @@ class HttpClass {
      this.setInterceptors();
    }
 
-
    setInterceptors = () => {
      this.instance.interceptors.request.use((config) => config,
-       (error) =>
-       // Do something with request error
-         Promise.reject(error));
+       (error) => Promise.reject(error));
 
-     this.instance.interceptors.response.use((response) =>
-     // Any status code that lie within the range of 2xx cause this function
-     // to trigger Do something with response data
-       response,
-     (error) =>
-     // Any status codes that falls outside the range of 2xx cause this
-     // function to trigger Do something with response error
-       Promise.reject(error));
+     this.instance.interceptors.response.use((response) => response,
+       (error) => Promise.reject(error));
    };
 }
 
