@@ -1,20 +1,22 @@
 import { combineReducers } from 'redux';
 
 import {
-  appReducers,
-  restAppConfig,
-  setAppDirection,
-  setAppRestBasicUrl
-} from './app-config';
+  createTaskAction,
+  deleteTaskAction,
+  getTaskAction,
+  tasksReducers,
+  updateTaskAction
+} from './tasks';
 
 export { default as configureStore } from './config/configureStore';
 
 export const reducers = combineReducers({
-  appConfig: appReducers
+  tasks: tasksReducers
 });
 
 export const actions = {
-  restAppConfig,
-  setAppDirection,
-  setAppRestBasicUrl
+  createTaskAction,
+  deleteTaskAction,
+  getTaskAction,
+  updateTaskAction
 };

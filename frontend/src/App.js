@@ -1,26 +1,41 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
+import { connect } from 'react-redux';
 
-import logo from './logo.svg';
+import { TasksList } from '#components';
+import { actions } from '#store';
+import { Flex } from '#widgets';
 
-function App() {
+const App = ({
+  getTasks
+}) => {
+  getTasks();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Flex
+      flex={1}
+      alignSelf="stretch"
+    >
+      <Flex
+        flex={1}
+      >
+        <TasksList type="todo" />
+      </Flex>
+      <Flex
+        flex={1}
+      >
+        <TasksList type="doing" />
+      </Flex>
+      <Flex
+        flex={1}
+      >
+        <TasksList type="done" />
+      </Flex>
+    </Flex>
   );
-}
+};
 
-export default App;
+const mapDispatchToProps = {
+  getTasks: actions.getTaskAction
+};
+
+export default connect(null, mapDispatchToProps)(App);

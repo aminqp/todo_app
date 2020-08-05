@@ -2,10 +2,11 @@ import * as axios from 'axios';
 
 class HttpClass {
    headers = {
+     Accept: 'application/json',
      'Accept-Language': 'en',
      Authorization: '',
-     accept: 'application/json',
-     'content-type': 'application/json; charset=utf-8'
+     'Content-Type': 'application/json; charset=utf-8',
+     'x-trigger': 'CORS'
    };
 
   instance = null

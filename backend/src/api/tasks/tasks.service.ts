@@ -3,15 +3,15 @@ import {
   ListsFilterOptionsInterface ,
   ListsPaginationOptionsInterface ,
   ListsSortOptionsInterface
-}                    from '../../interfaces';
+}                    from './interfaces';
 import * as mongoose from 'mongoose';
-import TasksModel    from './task.schema';
+import TasksModel from './task.schema';
 import {
   ListsFilterOptions ,
   ListsPaginationOptions ,
   ListsSortOptions ,
   TaskStatus
-}                    from '../../constants';
+}                 from './constants';
 
 /* TODO-qp::
  *   1) make it abstract
@@ -21,9 +21,7 @@ class TasksService
   constructor(
       private _model = TasksModel
   )
-  {
-    console.log( '\n\n constructor => this._model -> ' , this._model );
-  }
+  {}
   
   async findAll(
       filtersOptions : ListsFilterOptionsInterface ,

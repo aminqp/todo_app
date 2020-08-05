@@ -19,7 +19,6 @@ const useFetch = (fetch) => {
         return res;
       })
       .catch((error) => {
-        console.log(' useFetch => error.request -> ', error.response);
         setData(error.response?.data);
         setResponse(error.response);
         setLoad('failure');

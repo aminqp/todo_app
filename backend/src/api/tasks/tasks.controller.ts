@@ -1,7 +1,7 @@
 import { Request , Response }     from 'express';
 import * as HttpStatus            from 'http-status-codes';
 import TaskService                from './tasks.service';
-import { setListResponseHeaders } from '../../utilities';
+import { setListResponseHeaders } from '../../shared';
 
 /* TODO-qp::
  *   1) make it abstract
@@ -15,7 +15,6 @@ export class TaskController
   
   list = async ( req : Request , res : Response ) =>
   {
-    
     const {
             query : {
               paginate__pageSize__ ,
@@ -23,14 +22,14 @@ export class TaskController
               sort_by___createdAt__ ,
               sort_by__updatedAt__ ,
               search_by__name__ ,
-              search_by__status__
+              filter_by__status__
             }
           } = req;
     
     const all = await this.taskService
         .findAll( {
                     __name__   : <string>search_by__name__ ,
-                    __status__ : <string>search_by__status__
+                    __status__ : <string>filter_by__status__
                   } ,
                   {
                     __pageNumber__ : Number( paginate__pageNumber__ ) ,
@@ -43,6 +42,7 @@ export class TaskController
         );
     
     res.header( setListResponseHeaders() )
+      .status(HttpStatus.OK)
         .json( all );
   };
   
@@ -58,6 +58,11 @@ export class TaskController
     }
     
     const task = await this.taskService.findById( taskId );
+  
+    if ( !task )
+    {
+      res.send( HttpStatus.NOT_FOUND )
+    }
     
     res.status( HttpStatus.OK )
         .json( task );
@@ -87,7 +92,7 @@ export class TaskController
     }
     else
     {
-      res.status( HttpStatus.NO_CONTENT )
+      res.status( HttpStatus.CREATED )
           .end();
     }
     

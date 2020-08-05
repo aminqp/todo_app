@@ -20,7 +20,7 @@ export const retrieve = ( taskId ,config = null) => {
 };
 
 export const create = ( data = null, config = null) => {
-    return Http.instance.post(`/api/v1/tasks/add`, data, config);
+    return Http.instance.post(`/api/v1/tasks/`, data, config);
 };
 
 export const update = ( taskId ,data = null, config = null) => {

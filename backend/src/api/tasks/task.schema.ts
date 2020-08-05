@@ -1,8 +1,7 @@
-import { TaskStatus } from '../../constants'
-import { TasksModelInterface }     from '../../interfaces'
+import { TaskStatus }          from './constants'
+import { TasksModelInterface } from './interfaces'
 // @ts-ignore
 import * as mongoosePaginate     from 'mongoose-paginate-v2'
-// import { mongoosePagination } from "ts-mongoose-pagination";
 
 import { model , Schema } from 'mongoose';
 

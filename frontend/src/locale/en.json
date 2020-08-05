@@ -1,3 +1,12 @@
 {
-  "app-name": "Todo"
+  "app-name": "Todo",
+  "global.todo": "To do",
+  "global.doing": "Doing",
+  "global.done": "Done",
+  "global.search": "Search",
+  "global.task-card-action.todo": "Set as To do",
+  "global.task-card-action.doing": "Set as Doing",
+  "global.task-card-action.done": "Set as Done",
+  "global.task-card-action.edit": "Edit",
+  "global.task-card-action.remove": "Remove"
 }
