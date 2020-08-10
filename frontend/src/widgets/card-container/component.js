@@ -1,15 +1,19 @@
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import PropTypes from 'prop-types';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { useFormatMessage } from 'react-intl-hooks';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Flex from '../tools/flex';
 import styles from './styles';
 
-const CardContainer = ({ children, title }) => {
+/** @namespace tasksList.totalDocs */
+
+const CardContainer = ({
+  children, title, onSearch, onFocus, tasksList, actions
+}) => {
   const classes = styles();
-  const text = useFormatMessage();
+  const text = useIntl();
 
   return (
     <Paper
@@ -18,16 +22,24 @@ const CardContainer = ({ children, title }) => {
       <Flex
         className={classes.cardTitle}
       >
-        <FormattedMessage id={title} />
+        <Flex flex={1}>
+          <FormattedMessage id={title} /> | {tasksList.totalDocs}
+        </Flex>
+        <Flex>
+          {actions}
+        </Flex>
+
       </Flex>
       <Flex
         alignSelf="stretch"
       >
         <TextField
           className={classes.inputText}
-          label={text({ id: 'global.search' })}
+          label={text.formatMessage({ id: 'global.search' })}
           variant="outlined"
           type="search"
+          onFocus={onFocus}
+          onChange={(e) => onSearch(e.target.value)}
         />
       </Flex>
       <Flex
@@ -40,6 +52,21 @@ const CardContainer = ({ children, title }) => {
 
     </Paper>
   );
+};
+
+CardContainer.propTypes = {
+  actions: PropTypes.node,
+  children: PropTypes.node.isRequired,
+  onFocus: PropTypes.func,
+  onSearch: PropTypes.func,
+  tasksList: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired
+};
+
+CardContainer.defaultProps = {
+  actions: null,
+  onFocus: () => null,
+  onSearch: () => null
 };
 
 export default CardContainer;

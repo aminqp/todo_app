@@ -1,4 +1,3 @@
 export * from './tools';
-export * from './form';
 export * from './card-container';
-export * from './task-card';
+export * from '../components/task-card';

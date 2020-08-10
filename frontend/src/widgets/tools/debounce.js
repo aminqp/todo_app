@@ -1,24 +1,16 @@
-let timeout = null;
-
-const autoCompleteFilter = (
-  data = [],
-  search = null,
-  cb = () => null,
-  time = 400
-) => {
-  try {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      if (!search) {
-        return data;
-      }
-      const rg = new RegExp(search.toLowerCase());
-      const tmp = data.filter((item) => rg.test(item.label.toLowerCase()));
-      cb(tmp);
-    }, time);
-  } catch (e) {
-    return data;
-  }
+let timeout;
+const debounce = (func, wait, immediate) => () => {
+  const context = this; const
+    // eslint-disable-next-line no-undef
+    args = arguments;
+  const later = () => {
+    timeout = null;
+    if (!immediate) func.apply(context, args);
+  };
+  const callNow = immediate && !timeout;
+  clearTimeout(timeout);
+  timeout = setTimeout(later, wait);
+  if (callNow) func.apply(context, args);
 };
 
-export default autoCompleteFilter;
+export default debounce;

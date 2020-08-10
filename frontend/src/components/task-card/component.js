@@ -1,4 +1,5 @@
 import Button from '@material-ui/core/Button';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertSharpIcon from '@material-ui/icons/MoreVertSharp';
@@ -7,12 +8,13 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { get12Time, standardDate } from '../tools/date';
-import Flex from '../tools/flex';
+import { get12Time, standardDate } from '#widgets/tools/date';
+import Flex from '#widgets/tools/flex';
+
 import styles from './style';
 
 const TaskCard = ({
-  data, onTaskView, submitAction
+  data, onTaskView, submitAction, loading
 }) => {
   const classes = styles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -50,10 +52,24 @@ const TaskCard = ({
       className={
         clsx(
           classes.container,
-          data.status
+          data.status,
+          loading
         )
       }
     >
+      {
+        loading && (
+          <LinearProgress
+            style={{
+              left: 0,
+              opacity: loading ? '1' : '0',
+              position: 'absolute',
+              top: 0,
+              width: '100%'
+            }}
+          />
+        )
+      }
       <Flex
         flexDirection="column"
         className={classes.content}
@@ -106,11 +122,13 @@ const TaskCard = ({
 
 TaskCard.propTypes = {
   data: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
   onTaskView: PropTypes.func.isRequired,
-  submitAction: PropTypes.func.isRequired,
+  submitAction: PropTypes.func.isRequired
 };
 
 TaskCard.defaultProps = {
+  loading: false
 };
 
 export default TaskCard;

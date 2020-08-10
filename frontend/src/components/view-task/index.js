@@ -1,1 +1,1 @@
-export { default as TaskForm } from './component';
+export { default as ViewTask } from './component';

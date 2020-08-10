@@ -2,8 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 export default makeStyles((theme) => ({
   body: {
-    margin: '20px 0',
-    padding: '30px 0'
+    paddingTop: '20px'
   },
   cardTitle: {
     fontSize: '18px',

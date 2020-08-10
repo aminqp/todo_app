@@ -6,7 +6,7 @@ import React from 'react';
 const style = makeStyles((theme) => ({
   container: theme.app.container
 }),
-{ name: 'widgets-' });
+{ name: 'widgets-container-' });
 
 const Container = ({ children, className }) => {
   try {
@@ -22,7 +22,6 @@ const Container = ({ children, className }) => {
       </div>
     );
   } catch (e) {
-    console.log(' Container => e -> ', e);
     return null;
   }
 };
