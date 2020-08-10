@@ -1,44 +1,30 @@
 import { makeStyles } from '@material-ui/core';
 
 export default makeStyles((theme) => ({
+  active: {
+    borderBottom: `2px solid ${theme.palette.green.main} !important`
+  },
   container: {
-    '& > div': {
-      margin: theme.spacing(2)
-    },
-    '&.doing': {
-      '&::before': { backgroundColor: theme.palette.blue.main }
-    },
-    '&.done': {
-      '&::before': { backgroundColor: theme.palette.green.main }
-    },
-    '&.todo': {
-      '&::before': { backgroundColor: theme.palette.gold.main }
-    },
-    '&::before': {
-      content: '""',
-      height: '100%',
-      left: 0,
-      position: 'absolute',
-      top: 0,
-      width: '35px'
-    },
-    padding: '30px',
-    position: 'relative'
+    backgroundColor: theme.palette.gray.main,
+    color: theme.palette.white.main,
+    height: '50px',
+    left: 0,
+    position: 'fixed',
+    top: 0,
+    width: '100%',
+    zIndex: 100
   },
-  date: {
-    borderTop: `1px solid ${theme.palette.gray.light}`,
-    fontSize: '12px'
-  },
-  description: {
-    fontSize: '14px'
-  },
-  name: {
-    fontSize: '16px',
-    fontWeight: '500',
-    textTransform: 'capitalize'
+  link: {
+    alignContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    borderBottom: '2px solid transparent',
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'center',
+    transition: 'border .3s linear'
   }
-
 }),
 {
-  name: 'show-task-'
+  name: 'top-nav-'
 });

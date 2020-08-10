@@ -3,28 +3,28 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 const appTheme = createMuiTheme({
   overrides: {
-    MuiInputBase: {
-      root: {
-        fontFamily: 'Nunito'
-      }
-    },
-    MuiInputLabel: {
-      root: {
-        fontFamily: 'Nunito'
-      }
-    },
+    // MuiInputBase: {
+    //   root: {
+    //     fontFamily: 'Nunito'
+    //   }
+    // },
+    // MuiInputLabel: {
+    //   root: {
+    //     fontFamily: 'Nunito'
+    //   }
+    // },
     MuiMenuItem: {
       root: {
-        fontFamily: 'Nunito',
+        // fontFamily: 'Nunito',
         fontSize: '12px',
         fontWeight: 300
       }
-    },
-    MuiOutlinedInput: {
-      root: {
-        fontFamily: 'Nunito'
-      }
     }
+    // MuiOutlinedInput: {
+    //   root: {
+    //     fontFamily: 'Nunito'
+    //   }
+    // }
   },
   palette: {
     background: {
@@ -45,10 +45,13 @@ const appTheme = createMuiTheme({
     },
     green: {
       main: green.A200
+    },
+    white: {
+      main: '#fff'
     }
   },
   typography: {
-    fontFamily: 'Nonito'
+    fontFamily: 'Nunito'
   }
 });
 

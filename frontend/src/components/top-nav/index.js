@@ -1,1 +1,1 @@
-export { default as ViewTask } from './component';
+export { default as TopNav } from './component';

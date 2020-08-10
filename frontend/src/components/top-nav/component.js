@@ -1,65 +1,54 @@
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-scroll';
 
-import { Flex, get12Time, standardDate } from '#widgets';
+import { Flex } from '#widgets';
 
 import styles from './style';
 
-const ViewTask = ({
-  open, data, onClose, onOpen
-}) => {
+const TopNav = () => {
   const classes = styles();
+  const Links = ['todo', 'doing', 'done'];
+  const [active, setActive] = useState();
 
   return (
-    <SwipeableDrawer
-      anchor="bottom"
-      open={open}
-      onClose={onClose}
-      onOpen={onOpen}
-
+    <Flex
+      className={classes.container}
     >
-      <Flex
-        flexDirection="column"
-        className={
-          clsx(
-            classes.container,
-            data?.status
-          )
-        }
-      >
-        <Flex
-          className={classes.name}
-        >
-          {data?.name}
-        </Flex>
-        <Flex
-          className={classes.description}
-        >
-          {data?.description}
-        </Flex>
-        <Flex
-          className={classes.date}
-        >
-          {standardDate(data?.updatedAt)}{' | '}
-          {get12Time(data?.updatedAt)}
-        </Flex>
-      </Flex>
-    </SwipeableDrawer>
+      {
+        Links.map((link) => (
+          <Link
+            className={
+              clsx(classes.link,
+                active === link && classes.active)
+            }
+            activeClass={classes.active}
+            to={link}
+            spy
+            smooth
+            hashSpy
+            offset={-250}
+            duration={500}
+            delay={0}
+            isDynamic
+            onSetActive={setActive}
+            // onSetInactive={this.handleSetInactive}
+            ignoreCancelEvents={false}
+          >
+            {link}
+          </Link>
+
+        ))
+      }
+
+    </Flex>
   );
 };
 
-ViewTask.propTypes = {
-  data: PropTypes.object,
-  onClose: PropTypes.func.isRequired,
-  onOpen: PropTypes.func.isRequired,
-  open: PropTypes.bool
+TopNav.propTypes = {
 };
 
-ViewTask.defaultProps = {
-  data: undefined,
-  open: false
+TopNav.defaultProps = {
 };
 
-export default ViewTask;
+export default TopNav;

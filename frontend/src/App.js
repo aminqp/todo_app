@@ -1,37 +1,84 @@
-import React, { useMemo, useState } from 'react';
+import { useMediaQuery, useTheme } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
+import { Element, Link } from 'react-scroll';
 
-import { TasksList } from '#components';
 import { actions } from '#store';
 import { Flex } from '#widgets';
+
+import { CreateTask, TasksList, TopNav } from './components';
 
 const App = ({
   getTasks
 }) => {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   getTasks();
 
   return (
     <Flex
       flex={1}
       alignSelf="stretch"
+      flexDirection="column"
+      flexDirection-md="row"
+      {...mobile ? { paddingTop: '50px' } : {}}
     >
-      <Flex
-        flex={1}
+      {mobile && <TopNav />}
+      <Element
+        style={{
+          alignSelf: 'stretch',
+          flex: 1
+        }}
+        name="#todo"
       >
-        <TasksList type="todo" />
-      </Flex>
-      <Flex
-        flex={1}
+        <Flex
+          flex={1}
+          alignSelf="stretch"
+        >
+          <TasksList
+            type="todo"
+            actions={(
+              <CreateTask />
+            )}
+          />
+        </Flex>
+      </Element>
+      <Element
+        style={{
+          alignSelf: 'stretch',
+          flex: 1
+        }}
+        name="#doing"
       >
-        <TasksList type="doing" />
-      </Flex>
-      <Flex
-        flex={1}
+        <Flex
+          flex={1}
+          alignSelf="stretch"
+        >
+          <TasksList type="doing" />
+        </Flex>
+      </Element>
+      <Element
+        style={{
+          alignSelf: 'stretch',
+          flex: 1
+        }}
+        name="#done"
       >
-        <TasksList type="done" />
-      </Flex>
+        <Flex
+          flex={1}
+          alignSelf="stretch"
+        >
+          <TasksList type="done" />
+        </Flex>
+      </Element>
     </Flex>
   );
+};
+
+App.propTypes = {
+  getTasks: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {

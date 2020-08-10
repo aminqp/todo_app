@@ -1,40 +1,43 @@
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Fab from '@material-ui/core/Fab';
 import useTheme from '@material-ui/core/styles/useTheme';
 import TextField from '@material-ui/core/TextField';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import AddIcon from '@material-ui/icons/Add';
-import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-import SaveIcon from '@material-ui/icons/Save';
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useLayoutEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { connect } from 'react-redux';
 
-import { actions } from '#store';
-import { Flex, useFetch } from '#widgets';
+import { Flex } from '#widgets';
 
 import styles from './style';
 
-const TaskForm = ({ data }) => {
+const TaskForm = ({
+  open, data, submit, onClose
+}) => {
   const classes = styles();
   const theme = useTheme();
   const text = useIntl();
-  const [loading, setLoading] = useState(false);
-  const [openForm, setOpenForm] = useState(false);
   const [formData, setFormData] = useState({
-    description: data.description,
-    name: data.name
+    description: data?.description,
+    name: data?.name
   });
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
+  useLayoutEffect(() => {
+    setFormData(data);
+  }, [data]);
+
+  /*
+  * TODO-qp::
+  *  1) form validator
+  * */
   const onSubmit = () => {
-    setLoading(true);
+    if (formData.name) {
+      submit(formData);
+    }
   };
 
   return (
@@ -42,17 +45,22 @@ const TaskForm = ({ data }) => {
       className={classes.container}
     >
       <Dialog
-        open={openForm}
+        open={open}
         fullScreen={fullScreen}
-        onClose={() => setOpenForm(false)}
+        onClose={() => onClose(false)}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          <FormattedMessage id="forms.create-new-task" />
+          <FormattedMessage id={
+            data ? 'forms.modify-task'
+              : 'forms.create-new-task'
+          }
+          />
         </DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
+            value={formData?.name}
             margin="dense"
             id="name"
             label={text.formatMessage({ id: 'forms.create-task.task-name' })}
@@ -66,9 +74,9 @@ const TaskForm = ({ data }) => {
             })}
           />
           <TextField
-            autoFocus
             margin="dense"
             id="description"
+            value={formData?.description}
             label={text.formatMessage({ id: 'forms.create-task.task-description' })}
             type="text"
             fullWidth
@@ -83,11 +91,15 @@ const TaskForm = ({ data }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenForm(false)} color="primary">
+          <Button onClick={() => onClose(false)} color="primary">
             <FormattedMessage id="forms.cancel" />
           </Button>
           <Button onClick={() => onSubmit()} color="primary">
-            <FormattedMessage id="forms.save" />
+            <FormattedMessage id={
+              data ? 'forms.update'
+                : 'forms.save'
+            }
+            />
           </Button>
         </DialogActions>
       </Dialog>
@@ -95,9 +107,16 @@ const TaskForm = ({ data }) => {
   );
 };
 
-const mapDispatchToProps = {
-  createTask: actions.createTaskAction,
-  updateTask: actions.updateTaskAction
+TaskForm.propTypes = {
+  data: PropTypes.object,
+  onClose: PropTypes.func.isRequired,
+  open: PropTypes.bool,
+  submit: PropTypes.func.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(TaskForm);
+TaskForm.defaultProps = {
+  data: undefined,
+  open: false
+};
+
+export default TaskForm;

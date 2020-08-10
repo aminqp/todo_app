@@ -1,1 +1,1 @@
-export { default as CreateTask } from './component';
+export { default as TaskForm } from './component';
