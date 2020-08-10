@@ -19,7 +19,7 @@ export class TaskController
             query : {
               paginate__pageSize__ ,
               paginate__pageNumber__ ,
-              sort_by___createdAt__ ,
+              sort_by__createdAt__ ,
               sort_by__updatedAt__ ,
               search_by__name__ ,
               filter_by__status__
@@ -36,7 +36,7 @@ export class TaskController
                     __pageSize__   : Number( paginate__pageSize__ )
                   } ,
                   {
-                    __createdAt__ : <string>sort_by___createdAt__ ,
+                    __createdAt__ : <string>sort_by__createdAt__ ,
                     __updatedAt__ : <string>sort_by__updatedAt__
                   }
         );
