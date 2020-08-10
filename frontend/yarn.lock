@@ -7187,6 +7187,11 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "^3.0.0"
 
+lodash.throttle@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
+  integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
+
 lodash.unionwith@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.unionwith/-/lodash.unionwith-4.6.0.tgz#74d140b5ca8146e6c643c3724f5152538d9ac1f0"
@@ -9307,13 +9312,6 @@ react-error-overlay@^6.0.7:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
   integrity sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
 
-react-intl-hooks@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/react-intl-hooks/-/react-intl-hooks-1.0.11.tgz#09c67280000a9db64f53e60596f500fb49ca46e6"
-  integrity sha512-RlnIZkezcYtF1VG3QhETpHIhhv9rnpRBNbj6qgyATdZ1reirQSdsOquaOi1v2xE5VKiHsVQfU145UgAotT1GfA==
-  dependencies:
-    react-intl "^5.4.5"
-
 react-intl@^5.4.5:
   version "5.4.5"
   resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-5.4.5.tgz#5f81241d01da3a7a3133931606594bcea1783e74"
@@ -9347,6 +9345,14 @@ react-redux@^7.2.1:
     loose-envify "^1.4.0"
     prop-types "^15.7.2"
     react-is "^16.9.0"
+
+react-scroll@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/react-scroll/-/react-scroll-1.8.0.tgz#0280cbe575e4e1a2f103c7cc6143dd38133573bd"
+  integrity sha512-oZfBXPhcxYPR8elI9tC3ORT6+iqiPPJWslsdR9intbNI5PVSa4XoAfC0I/cB3zk5lxQ/NSexCnT+8RqJL8mSZQ==
+  dependencies:
+    lodash.throttle "^4.1.1"
+    prop-types "^15.7.2"
 
 react-transition-group@^4.4.0:
   version "4.4.1"
