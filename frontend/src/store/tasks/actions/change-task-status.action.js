@@ -1,16 +1,20 @@
 /* eslint-disable */
-import { UPDATE_TASK } from '../types';
+import getTasksByType from '#store/tasks/actions/get-task-by-type.action';
+import { TasksCollection } from '../../../apis';
 
 
-export default (data) => (dispatch) => {
-  
-  /*
-  TODO-qp::
-   1) call create api then dispatch
-  * */
-  
-  return  dispatch({
-    type: UPDATE_TASK,
-    data,
-  });
+export default (actionType, data) => (dispatch) => {
+  return TasksCollection
+    .update(data._id,{"status": actionType})
+    .then(response=>{
+      dispatch(getTasksByType(data.status));
+      dispatch(getTasksByType(actionType));
+      return true
+    })
+    .catch(e=>{
+        /* TODO-qp::
+        *   1) handle error
+        * */
+      return false
+    })
 }

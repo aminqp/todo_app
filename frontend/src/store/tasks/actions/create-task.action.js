@@ -1,16 +1,12 @@
-/* eslint-disable */
-import { CREATE_TASK } from '../types';
+import { TasksCollection } from '#apis';
 
+import getTasksByType from './get-task-by-type.action';
 
-export default (direction) => (dispatch) => {
-  
-  /*
-  TODO-qp::
-   1) call create api then dispatch
-  * */
-  
-  return  dispatch({
-    type: CREATE_TASK,
-    direction,
+export default (formData) => async (dispatch) => TasksCollection.create(formData)
+  .then(
+    (response) => {
+      dispatch(getTasksByType('todo'));
+    }
+  )
+  .catch((e) => {
   });
-}

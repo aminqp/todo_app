@@ -1,31 +1,22 @@
-/* eslint-disable */
-import { updateTaskAction } from '#store/tasks';
-import { useFetch } from '#widgets';
 import { TasksCollection } from '../../../apis';
-import { GET_TASKS_LIST } from '../types';
+import { GET_TASKS_LIST_BY_TYPE } from '../types';
 
-
-export default () => async (dispatch) => {
-  
-    await Promise.all([
-     TasksCollection.list({
-       params: {filter_by__status__: 'todo',}
-      }),
-    TasksCollection.list({
-     params: { filter_by__status__: 'doing',}
-        }),
-    TasksCollection.list({
-     params: { filter_by__status__: 'done',}
-        }),
-  ]).then(response=>{
-     dispatch({
-      type: GET_TASKS_LIST,
+export default (type, sort) => (dispatch) => new Promise((resolve, reject) => {
+  TasksCollection.list({
+    params: {
+      filter_by__status__: type,
+      sort_by__createdAt__: sort || -1
+    }
+  }).then((response) => {
+    dispatch({
       data: {
-        todo: response[0].data,
-        doing: response[1].data,
-        done: response[2].data,
+        [type]: response.data
       },
+      type: GET_TASKS_LIST_BY_TYPE
     });
+    resolve(response);
   })
-  
-}
+    .catch((e) => {
+      reject(e);
+    });
+});
