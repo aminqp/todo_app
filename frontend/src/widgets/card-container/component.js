@@ -1,7 +1,7 @@
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { memo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Flex from '../tools/flex';
@@ -69,4 +69,4 @@ CardContainer.defaultProps = {
   onSearch: () => null
 };
 
-export default CardContainer;
+export default memo(CardContainer);
