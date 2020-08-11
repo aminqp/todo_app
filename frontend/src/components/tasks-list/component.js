@@ -1,6 +1,8 @@
 import LinearProgress from '@material-ui/core/LinearProgress';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, {
+  memo, useCallback, useEffect, useState
+} from 'react';
 import { connect } from 'react-redux';
 
 import { actions } from '#store';
@@ -20,9 +22,10 @@ const TasksList = ({
   const [formData, setFormData] = useState(null);
   const [viewTask, setViewTask] = useState(null);
 
-  const getSearch = (value) => debounce(() => {
+  const getSearch = useCallback((value) => debounce(() => {
     if (value.length > 0) {
       const rg = new RegExp(value.toLowerCase());
+      console.log(' TasksList => tasks[type] -> ', tasks[type]);
       const tmp = tasks[type].docs.filter((item) => rg.test(encodeURI(item.name.toLowerCase())));
       setTasksList({
         ...tasks[type],
@@ -33,18 +36,20 @@ const TasksList = ({
       setTasksList(tasks[type]);
     }
     setSearching(false);
-  }, 600);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, 600), [tasks[type]]);
 
-  const onSearch = (value) => {
+  const onSearch = useCallback((value) => {
     setSearching(true);
     getSearch(encodeURI(value))();
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tasks[type]]);
 
   const removeLoader = () => {
     setSelectedCard(null);
   };
 
-  const submitAction = (actionType, data) => {
+  const submitAction = useCallback((actionType, data) => {
     setSelectedCard(data);
     switch (actionType) {
       case 'edit':
@@ -60,9 +65,10 @@ const TasksList = ({
             removeLoader();
           });
     }
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tasks[type]]);
 
-  const onUpdateTask = (values) => {
+  const onUpdateTask = useCallback((values) => {
     updateTask({
       ...formData,
       ...values
@@ -74,7 +80,8 @@ const TasksList = ({
       .catch((e) => {
         /* TODO-qp:: handle error */
       });
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tasks[type]]);
 
   useEffect(() => {
     setTasksList(tasks[type]);
@@ -146,4 +153,4 @@ const mapDispatchToProps = {
   deleteTask: actions.deleteTaskAction,
   updateTask: actions.updateTaskAction
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TasksList);
+export default memo(connect(mapStateToProps, mapDispatchToProps)(TasksList));

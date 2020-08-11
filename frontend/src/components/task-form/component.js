@@ -7,7 +7,9 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import TextField from '@material-ui/core/TextField';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState } from 'react';
+import React, {
+  memo, useCallback, useLayoutEffect, useState
+} from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Flex } from '#widgets';
@@ -34,11 +36,11 @@ const TaskForm = ({
   * TODO-qp::
   *  1) form validator
   * */
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     if (formData.name) {
       submit(formData);
     }
-  };
+  }, [formData, submit]);
 
   return (
     <Flex
@@ -119,4 +121,4 @@ TaskForm.defaultProps = {
   open: false
 };
 
-export default TaskForm;
+export default memo(TaskForm);

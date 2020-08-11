@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertSharpIcon from '@material-ui/icons/MoreVertSharp';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { get12Time, standardDate } from '#widgets/tools/date';
@@ -131,4 +131,4 @@ TaskCard.defaultProps = {
   loading: false
 };
 
-export default TaskCard;
+export default memo(TaskCard);
